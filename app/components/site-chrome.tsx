@@ -13,6 +13,7 @@ export function SiteHeader({ innerPage = false }: SiteChromeProps) {
       </a>
       <nav aria-label="Primary navigation">
         <a href={`${prefix}#pricing`}>Pricing</a>
+        <a href="/services">Services</a>
         <a href={`${prefix}#work`}>Our Work</a>
         <a href="/team">Team</a>
         <a className="branding-nav" href="/agent-branding"><span>Agent Branding</span><em>NEW</em></a>
@@ -31,7 +32,7 @@ export function SiteFooter({ innerPage = false }: SiteChromeProps) {
         <span>MARKETMY<span className="blue">.PROPERTY</span></span>
       </a>
       <p>© 2026 MARKETMY.PROPERTY</p>
-      <div><a href={`${prefix}#pricing`}>Pricing</a><a href={`${prefix}#work`}>Work</a><a href="/team">Team</a><a href="/agent-branding">Branding</a><a href={`${prefix}#book`}>Book</a></div>
+      <div><a href={`${prefix}#pricing`}>Pricing</a><a href="/services">Services</a><a href="/faq">FAQ</a><a href="/san-diego-real-estate-media">Areas</a><a href="/team">Team</a><a href="/agent-branding">Branding</a><a href={`${prefix}#book`}>Book</a></div>
     </footer>
   );
 }

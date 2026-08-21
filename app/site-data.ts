@@ -16,6 +16,7 @@ export const bookingSelectionEvent = "marketmy:package-selected";
 export type Package = {
   name: string;
   price: string;
+  amount: number;
   tag: string;
   description: string;
   features: readonly string[];
@@ -27,6 +28,7 @@ export const packages: readonly Package[] = [
   {
     name: "Listing Essentials",
     price: "$425",
+    amount: 425,
     tag: "THE CLEAN START",
     description: "Everything a standard listing needs to launch professionally.",
     features: ["25–30 listing photos", "Up to 10 drone photos", "Matterport or Zillow 3D", "CubiCasa floor plan", "Matterport hosting if selected", "Single-sided listing flyer"],
@@ -34,6 +36,7 @@ export const packages: readonly Package[] = [
   {
     name: "Listing Social",
     price: "$550",
+    amount: 550,
     tag: "MOST POPULAR",
     description: "The essential listing package, built to move on social.",
     features: ["Everything in Essentials", "15–30 second property reel", "2 digital twilight images", "Vertical social delivery", "AI reel upgrade available +$75"],
@@ -42,6 +45,7 @@ export const packages: readonly Package[] = [
   {
     name: "Complete Listing",
     price: "$795",
+    amount: 795,
     tag: "FULL PROPERTY STORY",
     description: "A complete photo, video and 3D launch for the listing.",
     features: ["Everything in Essentials", "60–90 second property tour", "Separate 15-second vertical reel", "2 digital twilight images", "Branded + unbranded videos", "Single-sided listing flyer"],
@@ -49,6 +53,7 @@ export const packages: readonly Package[] = [
   {
     name: "Agent-Led Listing",
     price: "$925",
+    amount: 925,
     tag: "PUT THE AGENT ON CAMERA",
     description: "A polished agent-led story with the listing at the center.",
     features: ["Everything in Essentials", "1–2.5 minute talking-head tour", "Intro + one talking point", "Light scripting and coaching", "Subtitles included", "Separate 15-second reel", "Branded + unbranded videos"],
@@ -56,6 +61,7 @@ export const packages: readonly Package[] = [
   {
     name: "Luxury Campaign",
     price: "$1,495",
+    amount: 1495,
     tag: "FROM",
     description: "High-touch coverage for a listing that needs the full campaign.",
     features: ["40–45 premium photos", "Up to 10 drone photos", "Actual twilight coverage", "1.5–2.5 minute luxury tour", "Separate property reel", "Matterport or Zillow 3D + floor plan", "Flyer format of your choice", "AI content by custom quote"],

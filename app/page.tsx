@@ -3,18 +3,47 @@ import { JotformEmbed } from "./components/jotform-embed";
 import { PortfolioRotator } from "./components/portfolio-rotator";
 import { PricingSection } from "./components/pricing-section";
 import { SiteFooter, SiteHeader } from "./components/site-chrome";
-import { business, portfolio } from "./site-data";
+import { business, packages, portfolio } from "./site-data";
+import { faqItems } from "./seo-data";
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: business.name,
-  url: business.siteUrl,
-  logo: `${business.siteUrl}/marketmy-logo.webp`,
-  email: business.email,
-  sameAs: [business.instagramUrl],
-  areaServed: ["San Diego County, California", "Riverside County, California"],
-  description: "Real estate photography, drone, video, 3D tours and listing media with straightforward package pricing.",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": `${business.siteUrl}/#business`,
+      name: business.name,
+      url: business.siteUrl,
+      logo: `${business.siteUrl}/marketmy-logo.webp`,
+      image: `${business.siteUrl}/og.png`,
+      email: business.email,
+      sameAs: [business.instagramUrl],
+      areaServed: ["San Diego County, California", "Riverside County, California"],
+      description: "Real estate photography, drone, video, 3D tours and listing media with straightforward package pricing.",
+      knowsAbout: ["Real estate photography", "Real estate videography", "Drone photography", "Twilight photography", "Matterport", "Zillow 3D Home", "CubiCasa floor plans"],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Real estate media packages",
+        itemListElement: packages.map((item) => ({
+          "@type": "Offer",
+          name: item.name,
+          description: item.description,
+          priceCurrency: "USD",
+          price: item.amount,
+          url: `${business.siteUrl}/#pricing`,
+          availability: "https://schema.org/InStock",
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${business.siteUrl}/#website`,
+      url: business.siteUrl,
+      name: business.name,
+      publisher: { "@id": `${business.siteUrl}/#business` },
+      inLanguage: "en-US",
+    },
+  ],
 };
 
 export default function Home() {
@@ -46,7 +75,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="services-band" aria-label="Services"><div><strong>PHOTO</strong><span>MLS-ready coverage</span></div><div><strong>DRONE</strong><span>Part 107 operations</span></div><div><strong>VIDEO</strong><span>Tours, reels, agent-led</span></div><div><strong>3D</strong><span>Matterport + Zillow</span></div><div><strong>DESIGN</strong><span>Flyers + magazines</span></div></section>
+        <section className="services-band" aria-label="Services">
+          <a href="/services/real-estate-photography"><strong>PHOTO</strong><span>MLS-ready coverage</span></a>
+          <a href="/services/drone-photography"><strong>DRONE</strong><span>Part 107 operations</span></a>
+          <a href="/services/real-estate-video"><strong>VIDEO</strong><span>Tours, reels, agent-led</span></a>
+          <a href="/services/3d-tours"><strong>3D</strong><span>Matterport + Zillow</span></a>
+          <a href="/agent-branding"><strong>BRAND</strong><span>Agent strategy + content</span></a>
+        </section>
 
         <section className="about" id="about">
           <div className="about-art"><Image src="/marketmy-logo.webp" alt="MarketMy.Property logo" width="420" height="420" /></div>
@@ -56,6 +91,11 @@ export default function Home() {
         <section className="process section-light" id="process">
           <div className="section-heading compact"><p className="eyebrow dark">FROM BOOKED TO DELIVERED</p><h2>Simple on purpose.</h2></div>
           <div className="process-grid"><article><span>01</span><h3>Pick it</h3><p>Choose a package or build the listing à la carte.</p></article><article><span>02</span><h3>Book it</h3><p>Send the address, size, date and any add-ons.</p></article><article><span>03</span><h3>We shoot it</h3><p>We arrive ready, capture the property and keep the day moving.</p></article><article><span>04</span><h3>You launch it</h3><p>Photos within 24 hours. Video draft within 48.</p></article></div>
+        </section>
+
+        <section className="home-faq" aria-labelledby="home-faq-title">
+          <div className="home-faq-heading"><p className="eyebrow">ANSWERS BEFORE THE SALES CALL</p><h2 id="home-faq-title">What agents ask first.</h2><a href="/faq">See every answer <span aria-hidden="true">→</span></a></div>
+          <div className="home-faq-grid">{faqItems.slice(0, 4).map((item, index) => <article key={item.question}><span>0{index + 1}</span><h3>{item.question}</h3><p>{item.answer}</p></article>)}</div>
         </section>
 
         <section className="details">

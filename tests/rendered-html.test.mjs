@@ -36,10 +36,12 @@ test("includes keyboard, motion, image, and intake accessibility safeguards", as
 });
 
 test("publishes complete search and route metadata", async () => {
-  const [layout, team, branding, chrome, robots, sitemap] = await Promise.all([
+  const [layout, team, branding, chrome, robots, sitemap, seoData, servicePage, faqPage, areaPage] = await Promise.all([
     read("app/layout.tsx"), read("app/team/page.tsx"),
     read("app/agent-branding/page.tsx"), read("app/components/site-chrome.tsx"),
-    read("app/robots.ts"), read("app/sitemap.ts"),
+    read("app/robots.ts"), read("app/sitemap.ts"), read("app/seo-data.ts"),
+    read("app/components/service-page.tsx"), read("app/faq/page.tsx"),
+    read("app/san-diego-real-estate-media/page.tsx"),
   ]);
 
   assert.match(layout, /metadataBase: new URL\("https:\/\/marketmy\.property"\)/);
@@ -50,4 +52,13 @@ test("publishes complete search and route metadata", async () => {
   assert.match(robots, /sitemap\.xml/);
   assert.match(sitemap, /marketmy\.property\/team/);
   assert.match(sitemap, /marketmy\.property\/agent-branding/);
+  assert.match(sitemap, /marketmy\.property\/services\/\$\{slug\}/);
+  assert.match(sitemap, /marketmy\.property\/faq/);
+  assert.match(sitemap, /marketmy\.property\/san-diego-real-estate-media/);
+  assert.match(seoData, /"@type": "Service"/);
+  assert.match(servicePage, /application\/ld\+json/);
+  assert.match(faqPage, /"@type": "FAQPage"/);
+  assert.match(areaPage, /SAN DIEGO COUNTY COVERAGE/);
+  assert.match(chrome, /href="\/services"/);
+  assert.match(chrome, /href="\/faq"/);
 });
