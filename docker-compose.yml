@@ -1,0 +1,17 @@
+services:
+  marketmyproperty:
+    build:
+      context: https://github.com/${GITHUB_OWNER}/marketmy-property.git#main
+      dockerfile: Dockerfile
+    container_name: MarketMyProperty
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.marketmyproperty.rule=Host(`${DOMAIN}`) || Host(`www.${DOMAIN}`)
+      - traefik.http.routers.marketmyproperty.entrypoints=websecure
+      - traefik.http.routers.marketmyproperty.tls=true
+      - traefik.http.routers.marketmyproperty.tls.certresolver=letsencrypt
+      - traefik.http.services.marketmyproperty.loadbalancer.server.port=3000
